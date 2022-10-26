@@ -4,21 +4,21 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    echo "Building the application."
+                    echo "Building in $BRANSH_NAME"
                 }
             }
         }
         stage('test') {
             steps {
                 script {
-                    echo "Testing the application..."
+                    echo "Testing in $BRANSH_NAME"
                 }
             }
         }
         stage('deploy') {
             steps {
                 script {
-                    echo "Deploying the application..."
+                    echo "Deploying in $BRANSH_NAME"
                 }
             }
         }
