@@ -4,14 +4,14 @@ pipeline {
         stage('Hello') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker_credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) 
-                script{
-                    sh 'docker build -t node:v1 . '
-                    sh 'docker image ls'
-                    sh 'docker tag node:v1  fathalla22/node-js:v1'
-                    sh 'docker login -u ${USER} -p ${PASS}'
-                    sh 'docker push fathalla22/node-js:v1'
-                    sh 'docker run -d -p 3000:3000 node:v1'
-                }
+                    script{
+                        sh 'docker build -t node:v1 . '
+                        sh 'docker image ls'
+                        sh 'docker tag node:v1  fathalla22/node-js:v1'
+                        sh 'docker login -u ${USER} -p ${PASS}'
+                        sh 'docker push fathalla22/node-js:v1'
+                        sh 'docker run -d -p 3000:3000 node:v1'
+                    }
             }
         }
     }
