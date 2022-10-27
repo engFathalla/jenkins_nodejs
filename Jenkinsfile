@@ -1,6 +1,6 @@
-pipeline { 
+pipeline {
+    agent { label 'node2' }
     stages {
-        agent { label 'node2' }
         stage('Hello') {
             steps {
                 script{
