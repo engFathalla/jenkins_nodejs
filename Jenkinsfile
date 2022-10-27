@@ -1,7 +1,7 @@
 pipeline { 
     stages {
+        agent { label 'node2' }
         stage('Hello') {
-            agent { label 'node2' }
             steps {
                 script{
                     sh 'docker build -t node:v1 . '
