@@ -1,24 +1,16 @@
 pipeline {
-    agent { label 'agent' }
+    agent { label 'node1' }
     stages {
-        stage('build') {
+        stage('Hello') {
             steps {
-                script {
-                    echo "Building in $BRANCH_NAME"
-                }
-            }
-        }
-        stage('test') {
-            steps {
-                script {
-                    echo "Testing in $BRANCH_NAME"
-                }
-            }
-        }
-        stage('deploy') {
-            steps {
-                script {
-                    echo "Deploying in $BRANCH_NAME"
+                script{
+                    sh 'docker build -t node:v1 . '
+                    sh 'docker image ls'
+                    sh 'docker tag node:v1  fathalla22/node-js:v1'
+                    withCredentials([usernamePassword(credentialsId: 'docker_credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
+                    sh 'docker login -u ${USER} -p ${PASS}' }
+                    sh 'docker push fathalla22/node-js:v1'
+                    sh 'docker run -d -p 3000:3000 node:v1'
                 }
             }
         }
